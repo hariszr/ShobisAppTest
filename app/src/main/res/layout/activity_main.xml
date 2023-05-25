@@ -1,17 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="HelloWorld"
-        android:layout_gravity="center">
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:padding="20dp" >
 
-    </TextView>
+        <ImageView
+            android:id="@+id/profile_ImageView"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo_shobis_app"
+            android:layout_marginTop="20dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/fullname_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Fullname"
+            android:textColor="@color/black"
+            android:layout_marginTop="12sp" />
+
+        <TextView
+            android:id="@+id/email_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Email"
+            android:textColor="@color/black"
+            android:layout_marginTop="12sp" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_Logout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Log Out"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_logout" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="350dp"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+</RelativeLayout>

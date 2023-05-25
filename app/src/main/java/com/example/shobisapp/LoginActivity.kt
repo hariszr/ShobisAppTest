@@ -1,6 +1,7 @@
 package com.example.shobisapp
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,11 +18,19 @@ class LoginActivity : AppCompatActivity() {
     private var binding : ActivityLoginBinding? = null
     private var email : String = ""
     private var password : String = ""
+    private lateinit var profile : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
+
+        //cek session
+        profile = getSharedPreferences("login_session", MODE_PRIVATE)
+        if (profile.getString("email", null) != null) {
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            finish()
+        }
 
         binding!!.buttonLogin.setOnClickListener {
             email = binding!!.emailEditText.text.toString()
@@ -52,6 +61,14 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     if (response.body()?.response == true) {
+
+                        //buat session
+                        getSharedPreferences("login_session", MODE_PRIVATE)
+                            .edit()
+                            .putString("fullname", response.body()?.payload?.fullname)
+                            .putString("email", response.body()?.payload?.email)
+                            .apply()
+
                         binding!!.loading.visibility = View.GONE
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         Toast.makeText(this@LoginActivity, "Login success ", Toast.LENGTH_LONG)
